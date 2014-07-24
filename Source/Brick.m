@@ -18,18 +18,15 @@
         // create three dots per default
         Dot *dot1 = [[Dot alloc] init];
         dot1.index = (Index) {0,0};
-        dot1.previousIndex = dot1.index;
         dot1.brick = self;
         
         Dot *dot2 = [[Dot alloc] init];
         dot2.index = (Index) {0,1};
-        dot2.previousIndex = dot1.index;
         dot2.brick= self;
 
         
         Dot *dot3 = [[Dot alloc] init];
         dot3.index = (Index) {0,2};
-        dot3.previousIndex = dot1.index;
         dot3.brick = self;
 
         _dots = @[dot1, dot2, dot3];
@@ -46,6 +43,12 @@
         Dot *currentDot = _dots[i];
         // first dot is position of brick, second dot is one row above position of brick, etc.
         currentDot.index = (Index){self.index.x, self.index.y + i};
+    }
+}
+
+- (void)savePreviousPositionsOfDots {
+    for (Dot *dot in _dots) {
+        dot.previousIndex = dot.index;
     }
 }
 

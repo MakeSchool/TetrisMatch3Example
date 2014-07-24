@@ -14,4 +14,6 @@
 // first dot will be placed at index, second dot one row above, etc.
 @property (nonatomic) Index index;
 
+- (void)savePreviousPositionsOfDots;
+
 @end

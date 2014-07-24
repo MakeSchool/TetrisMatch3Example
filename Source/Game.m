@@ -58,6 +58,7 @@ static NSInteger const BRICK_LENGTH = 3;
     BOOL reachedGround = NO;
     BOOL targetIndexOccupied = NO;
     // set the index on the brick to update the dots of the brick
+    [_currentBrick savePreviousPositionsOfDots];
     _currentBrick.index = toIndex;
     
     for (Dot *dot in _currentBrick.dots) {
@@ -124,7 +125,7 @@ static NSInteger const BRICK_LENGTH = 3;
             id dot = _grid[j][i];
             
             if ([dot isKindOfClass:[Dot class]]) {
-                [rowString appendString:@"1"];
+                [rowString appendString:@"X"];
             } else {
                 [rowString appendString:@"0"];
             }

@@ -15,7 +15,7 @@
 }
 
 - (void)didLoadFromCCB {
-    [self schedule:@selector(gameStep) interval:0.3f];
+    [self schedule:@selector(gameStep) interval:0.5f];
     
      _game = [[Game alloc] init];
     
