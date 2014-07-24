@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class Brick;
+
 @interface Dot : NSObject
 
-@property NSInteger indexX;
-@property NSInteger indexY;
+@property Index index;
+@property Index previousIndex;
+@property (weak) Brick *brick;
 
 @end

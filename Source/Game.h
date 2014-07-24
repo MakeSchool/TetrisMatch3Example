@@ -8,12 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-struct Index {
-    NSInteger x;
-    NSInteger y;
-};
-typedef struct Index Index;
-
 @interface Game : NSObject
 
 - (NSString *)gridRepresentation;

@@ -8,14 +8,16 @@
 
 #import "Game.h"
 #import "Dot.h"
+#import "Brick.h"
 
 static NSInteger const COLUMNS = 5;
 static NSInteger const ROWS = 10;
+static NSInteger const BRICK_LENGTH = 3;
 
 @implementation Game {
     // column; row
     NSMutableArray *_grid;
-    Dot *_currentDot;
+    Brick *_currentBrick;
 }
 
 - (id)init {
@@ -38,40 +40,77 @@ static NSInteger const ROWS = 10;
 }
 
 - (void)step {
-    if (!_currentDot) {
-        [self spawnDot];
+    if (!_currentBrick) {
+        [self spawnBrick];
     } else {
-        Index currentIndex = {_currentDot.indexX, _currentDot.indexY};
-        Index newIndex = {_currentDot.indexX, _currentDot.indexY-1};
+        Index currentIndex = {_currentBrick.index.x, _currentBrick.index.y};
+        Index newIndex = {_currentBrick.index.x, _currentBrick.index.y-1};
         BOOL movePossible = [self moveFromIndex:currentIndex toIndex:newIndex];
         if (!movePossible) {
-            _currentDot = nil;
+            _currentBrick = nil;
         }
     }
 }
 
 - (BOOL)moveFromIndex:(Index)fromIndex toIndex:(Index)toIndex {
-    if (toIndex.y < 0 || _grid[toIndex.x][toIndex.y] != [NSNull null]) {
-        return NO;
-    } else {
-        Dot *dot = _grid[fromIndex.x][fromIndex.y];
-        _grid[fromIndex.x][fromIndex.y] = [NSNull null];
-        _grid[toIndex.x][toIndex.y] = dot;
-        dot.indexX = toIndex.x;
-        dot.indexY = toIndex.y;
+    // check if move is possible
+    BOOL movePossible = YES;
+    BOOL reachedGround = NO;
+    BOOL targetIndexOccupied = NO;
+    // set the index on the brick to update the dots of the brick
+    _currentBrick.index = toIndex;
+    
+    for (Dot *dot in _currentBrick.dots) {
+        reachedGround = dot.index.y == -1;
+        if (reachedGround) {
+            break;
+        }
         
-        return YES;
+        targetIndexOccupied = _grid[dot.index.x][dot.index.y] != [NSNull null];
+        
+        // check if the target index is occupied by a dot that belongs to this block
+        if (targetIndexOccupied) {
+            Dot *occuppingDot = _grid[dot.index.x][dot.index.y];
+            
+            if (occuppingDot.brick == dot.brick) {
+                targetIndexOccupied = NO;
+            }
+        }
+        
+        if (targetIndexOccupied) {
+            break;
+        }
     }
+    
+    movePossible = (!targetIndexOccupied && !reachedGround);
+    
+    if (!movePossible) {
+        // reset the position of the current brick because we can not move it
+        _currentBrick.index = fromIndex;
+        return NO;
+    }
+    
+    // if move was possible, actually move the dots of the brick in the grid
+    for (Dot *dot in _currentBrick.dots) {
+        _grid[dot.previousIndex.x][dot.previousIndex.y] = [NSNull null];
+        _grid[dot.index.x][dot.index.y] = dot;
+        dot.previousIndex = dot.index;
+    }
+
+    return YES;
 }
 
-- (void)spawnDot {
+- (void)spawnBrick {
     NSInteger randomColumn = arc4random_uniform(COLUMNS);
-    NSInteger spawnX = randomColumn;
-    NSInteger spawnY = ROWS-1;
-    _currentDot = [[Dot alloc] init];
-    _grid[spawnX][spawnY] = _currentDot;
-    _currentDot.indexX = spawnX;
-    _currentDot.indexY = spawnY;
+    NSInteger spawnY = ROWS-BRICK_LENGTH;
+    Index spawnIndex = {randomColumn, spawnY};
+
+    _currentBrick = [[Brick alloc] init];
+    _currentBrick.index = spawnIndex;
+
+    for (Dot *dot in _currentBrick.dots) {
+        _grid[dot.index.x][dot.index.y] = dot;
+    }
 }
 
 
@@ -95,7 +134,6 @@ static NSInteger const ROWS = 10;
         [gridString appendString:rowString];
     }
     
-    CCLOG(@"%@", gridString);
     return gridString;
 }
 

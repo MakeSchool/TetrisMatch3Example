@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		62D3F317198185A0001C51F8 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D3F316198185A0001C51F8 /* Game.m */; };
 		62D3F31B19818A10001C51F8 /* Dot.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D3F31A19818A10001C51F8 /* Dot.m */; };
+		62D3F31E19819807001C51F8 /* Brick.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D3F31D19819807001C51F8 /* Brick.m */; };
 		8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8392007918EE8E3300B6C429 /* GLKit.framework */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5908188484E7003F4D28 /* iPad-old@2x.png */; };
@@ -58,10 +59,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		621F0F8219819896008A0A45 /* Index.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Index.h; sourceTree = "<group>"; };
 		62D3F315198185A0001C51F8 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Game.h; path = Source/Game.h; sourceTree = "<group>"; };
 		62D3F316198185A0001C51F8 /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Game.m; path = Source/Game.m; sourceTree = "<group>"; };
 		62D3F31919818A10001C51F8 /* Dot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dot.h; path = Source/Dot.h; sourceTree = "<group>"; };
 		62D3F31A19818A10001C51F8 /* Dot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dot.m; path = Source/Dot.m; sourceTree = "<group>"; };
+		62D3F31C19819807001C51F8 /* Brick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Brick.h; path = Source/Brick.h; sourceTree = "<group>"; };
+		62D3F31D19819807001C51F8 /* Brick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Brick.m; path = Source/Brick.m; sourceTree = "<group>"; };
 		8392007918EE8E3300B6C429 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
 		B71F5908188484E7003F4D28 /* iPad-old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old@2x.png"; path = "Icons/iPad-old@2x.png"; sourceTree = "<group>"; };
@@ -139,6 +143,9 @@
 				62D3F316198185A0001C51F8 /* Game.m */,
 				62D3F31919818A10001C51F8 /* Dot.h */,
 				62D3F31A19818A10001C51F8 /* Dot.m */,
+				62D3F31C19819807001C51F8 /* Brick.h */,
+				62D3F31D19819807001C51F8 /* Brick.m */,
+				621F0F8219819896008A0A45 /* Index.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -353,6 +360,7 @@
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
+				62D3F31E19819807001C51F8 /* Brick.m in Sources */,
 				62D3F31B19818A10001C51F8 /* Dot.m in Sources */,
 				62D3F317198185A0001C51F8 /* Game.m in Sources */,
 			);
